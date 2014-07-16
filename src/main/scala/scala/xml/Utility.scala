@@ -234,7 +234,10 @@ object Utility extends AnyRef with parsing.TokenTests {
           } else {
             // children, so use long form: <xyz ...>...</xyz>
             sb.append('>')
-            sequenceToXML(el.child, el.scope, sb, stripComments)
+            sequenceToXML(el.child, el.scope, sb,
+              stripComments = stripComments,
+              minimizeTags  = minimizeTags
+            )
             sb.append("</")
             el.nameToString(sb)
             sb.append('>')

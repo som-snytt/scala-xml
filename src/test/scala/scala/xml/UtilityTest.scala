@@ -54,4 +54,13 @@ class UtilityTest {
     </hi>.hashCode // Bug #777
   }
 
+  @Test
+  def preserveMinimizeOnSerial(): Unit = {
+    val simple = Utility serialize <value key="attr"/>
+    assertEquals("""<value key="attr"/>""", simple.toString)
+    val parent = Utility serialize (<value key="attr"><value key="more"/></value>,
+      minimizeTags = MinimizeMode.Never
+    )
+    assertEquals("""<value key="attr"><value key="more"></value></value>""", parent.toString)
+  }
 }
